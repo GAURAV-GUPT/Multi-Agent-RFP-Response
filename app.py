@@ -61,11 +61,12 @@ def run_agent(llm, messages, user_content):
     except Exception as e:
         st.error(f"Error calling the LLM: {e}")
         return None
-
 def extract_text_from_pdf(uploaded_file):
     """Extract text from PDF file"""
     try:
-        pdf_reader = PyPDF2.PdfReader(uploaded_file)
+        # Use pypdf (recommended - it's the maintained version)
+        import pypdf
+        pdf_reader = pypdf.PdfReader(uploaded_file)
         text = ""
         for page in pdf_reader.pages:
             text += page.extract_text()
